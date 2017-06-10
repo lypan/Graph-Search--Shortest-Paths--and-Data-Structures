@@ -4,13 +4,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class Heap<T extends Pair> {
+public class MinHeap<T extends Pair> {
 	ArrayList<T> minHeap;
 	int[] indexMap;
 	private int heapSize;
 	private int heapCapacity;
 
-	public Heap(int capacity) {
+	public MinHeap(int capacity) {
 		minHeap = new ArrayList<>(capacity + 1);
 		indexMap = new int[capacity + 1];
 		heapSize = 0;
@@ -63,7 +63,7 @@ public class Heap<T extends Pair> {
 	}
 
 	public int extractMin() {
-		int min = (int)minHeap.get(1).getValue();
+		int minKey = (int)minHeap.get(1).getKey();
 
 		// swap index
 		exchIdx(1, heapSize);
@@ -76,14 +76,14 @@ public class Heap<T extends Pair> {
 		// heapify
 		sink(1);
 
-		return min;
+		return minKey;
 	}
 
 	public void decreaseVal( int k, int v) {
 		int kId = indexMap[k];
 		minHeap.get(kId).setValue(v);
 
-		swim(k);
+		swim(kId);
 	}
 
 	public boolean isEmpty() {
@@ -91,7 +91,7 @@ public class Heap<T extends Pair> {
 	}
 
 	public boolean greater(T p1, T p2) {
-		return p1.compareTo(p2) > 0;
+		return p1.compareTo(p2) >= 0;
 	}
 
 	public void exch(int[] array, int i, int j) {
@@ -101,10 +101,10 @@ public class Heap<T extends Pair> {
 	}
 
 	public void exchIdx(int i, int j) {
-		int Iid = indexMap[(int)minHeap.get(i).getKey()];
-		int Jid = indexMap[(int)minHeap.get(j).getKey()];
+		int iKey = (int)minHeap.get(i).getKey();
+		int jKey = (int)minHeap.get(j).getKey();
 
-		exch(indexMap, Iid, Jid);
+		exch(indexMap, iKey, jKey);
 	}
 
 }
