@@ -9,7 +9,7 @@ public class Pair<K,V> extends AbstractMap.SimpleEntry<K,V> implements Comparabl
 
 	@Override
 	public int compareTo(Pair<K, V> o) {
-		
+
 		return (int) getValue() - (int) o.getValue();
 	}
 
